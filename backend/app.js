@@ -1,14 +1,14 @@
 const express = require("express");
-var mongoose = require("mongoose");
-const app = express();
-const port = 8000;
+const mongoose = require("mongoose");
+require("dotenv").config();
 const cors = require("cors");
-
-mongoose.connect("mongodb://localhost:27017/assignment");
-app.use(cors());
-app.use(require("./routes"));
+const app = express();
+const port = process.env.PORT || 3000;
 app.use(express.json());
-app.listen(port, () => {
+app.use(require("./routes"));
+app.use(cors());
+mongoose.connect("mongodb://localhost:27017/assignment");
+app.listen(port, async () => {
   console.log(`Listening on port: ${port}`);
 });
 
